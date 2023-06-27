@@ -16,6 +16,7 @@ let currentJob = "?"
 let jobType = ""
 let jobNum = 0
 let randNum = 0
+let lastChoice = 0
 const tankNum = 4
 const dpsNum = 11
 const meleeNum = 5
@@ -26,7 +27,14 @@ const allNum = 19
 
 function selectingPrep() {
     header.textContent = "Selecting from: "
+    lastChoice = 0
 }
+//Tried making a fuunction wityh the job as parameter to cut down repetition in the switches
+/*function jobSelector(job) {
+    currentJob = `job`
+    emblem.src = src=`images/png/{${job}}.png`
+    
+}*/
 /*while (currentJob !== "?") {
     btnIco.src = src="images/SVG/CommandChange.svg"
     btnIco2.src = src="images/SVG/CommandChange2.svg"
@@ -89,10 +97,14 @@ randBtn.addEventListener("click", function() {
 
 function randomizer(type) {
     randNum = Math.floor(Math.random() * type) + 1;
-    console.log(randNum)
-    
-    return randNum
-
+    //console.log(randNum)
+    if (randNum === lastChoice) {
+        randomizer(type)
+    } else {
+        lastChoice = randNum
+        console.log(randNum)
+        return randNum
+    }
 }
 
 //Second solution:
@@ -121,24 +133,44 @@ function jobSelector(type) {
     }
 }
 
+/*jobSelector(job)
+function tankSelector() {
+    switch (randNum) {
+        case 1:
+            jobSelector(Warrior)
+            break
+        case 2:
+            jobSelector(Gunbreaker)
+            break
+        case 3:
+            jobSelector(DarkKnight)
+            break
+        case 4:
+            jobSelector(Paladin)
+            break
+    }
+}*/
+
 function tankSelector() {
     switch (randNum) {
         case 1:
             currentJob = "Warrior"
             emblem.src = src="images/png/Warrior.png"
-            break
+            break;
         case 2:
             currentJob = "Gunbreaker"
             emblem.src = src="images/png/Gunbreaker.png"
-            break
+            break;
         case 3:
             currentJob = "Dark knight"
             emblem.src = src="images/png/DarkKnight.png"
-            break
+            break;
         case 4:
             currentJob = "Paladin"
             emblem.src = src="images/png/Paladin.png"
-            break
+            break;
+        default:
+            header.textContent += "ERROR"
     }
 }
 
@@ -147,47 +179,49 @@ function dpsSelector() {
         case 1:
             currentJob = "Reaper"
             emblem.src = src="images/png/Reaper.png"
-            break
+            break;
         case 2:
             currentJob = "Samurai"
             emblem.src = src="images/png/Samurai.png"
-            break
+            break;
         case 3:
             currentJob = "Dancer"
             emblem.src = src="images/png/Dancer.png"
-            break
+            break;
         case 4:
             currentJob = "Summoner"
             emblem.src = src="images/png/Summoner.png"
-            break
+            break;
         case 5:
             currentJob = "Dragoon"
             emblem.src = src="images/png/Dragoon.png"
-            break
+            break;
         case 6:
             currentJob = "Machinist"
             emblem.src = src="images/png/Machinist.png"
-            break
+            break;
         case 7:
             currentJob = "Red Mage"
             emblem.src = src="images/png/RedMage.png"
-            break
+            break;
         case 8:
             currentJob = "Ninja"
             emblem.src = src="images/png/Ninja.png"
-            break
+            break;
         case 9:
             currentJob = "Bard"
             emblem.src = src="images/png/Bard.png" 
-            break
+            break;
         case 10:
             currentJob = "Black Mage"
             emblem.src = src="images/png/BlackMage.png"
-            break
+            break;
         case 11:
             currentJob = "間抜け"
             emblem.src = src="images/png/Monk.png" 
-            break
+            break;
+        default:
+            header.textContent += "ERROR"
     }
 }
 
@@ -196,23 +230,25 @@ function meleeSelector() {
         case 1:
             currentJob = "Reaper"
             emblem.src = src="images/png/Reaper.png"
-            break
+            break;
         case 2:
             currentJob = "Samurai"
             emblem.src = src="images/png/Samurai.png"
-            break
+            break;
         case 3:
             currentJob = "Dragoon"
             emblem.src = src="images/png/Dragoon.png"
-            break
+            break;
         case 4:
             currentJob = "Ninja"
              emblem.src = src="images/png/Ninja.png"
-             break
+             break;
         case 5:
             currentJob = "間抜け"
             emblem.src = src="images/png/Monk.png"
-            break
+            break;
+        default:
+            header.textContent += "ERROR"
     }
 }
 
@@ -221,15 +257,17 @@ function rangedSelector() {
          case 1:
             currentJob = "Dancer"
             emblem.src = src="images/png/Dancer.png"
-            break
+            break;
         case 2:
             currentJob = "Machinist"
             emblem.src = src="images/png/Machinist.png"
-            break
+            break;
         case 3:
             currentJob = "Bard"
             emblem.src = src="images/png/Bard.png" 
-            break
+            break;
+        default:
+                header.textContent += "ERROR"
     }
 }
 
@@ -238,15 +276,17 @@ function magicSelector() {
         case 1:
             currentJob = "Summoner"
             emblem.src = src="images/png/Summoner.png"
-            break
+            break;
         case 2:
             currentJob = "Red Mage"
             emblem.src = src="images/png/RedMage.png"
-            break
+            break;
         case 3:
             currentJob = "Black Mage"
             emblem.src = src="images/png/BlackMage.png"
-            break
+            break;
+        default:
+                header.textContent += "ERROR"
         }
     }
 
@@ -255,19 +295,21 @@ function healerSelector() {
         case 1:
             currentJob = "Sage"
             emblem.src = src="images/png/Sage.png" 
-            break
+            break;
         case 2:
             currentJob = "White Mage"
             emblem.src = src="images/png/WhiteMage.png"
-            break
+            break;
         case 3:
             currentJob = "Astrologian"
             emblem.src = src="images/png/Astrologian.png"
-            break
+            break;
         case 4:
             currentJob = "Scholar"
             emblem.src = src="images/png/Scholar.png"
-            break
+            break;
+        default:
+            header.textContent += "ERROR"
         }
 }
 
@@ -276,79 +318,81 @@ function allSelector() {
         case 1:
             currentJob = "Reaper"
             emblem.src = src="images/png/Reaper.png"
-            break
+            break;
         case 2:
             currentJob = "Samurai"
             emblem.src = src="images/png/Samurai.png"
-            break
+            break;
         case 3:
             currentJob = "Dancer"
             emblem.src = src="images/png/Dancer.png"
-            break
+            break;
         case 4:
             currentJob = "Summoner"
             emblem.src = src="images/png/Summoner.png"
-            break
+            break;
         case 5:
             currentJob = "Dragoon"
             emblem.src = src="images/png/Dragoon.png"
-            break
+            break;
         case 6:
             currentJob = "Machinist"
             emblem.src = src="images/png/Machinist.png"
-            break
+            break;
         case 7:
             currentJob = "Red Mage"
             emblem.src = src="images/png/RedMage.png"
-            break
+            break;
         case 8:
             currentJob = "Ninja"
             emblem.src = src="images/png/Ninja.png"
-            break
+            break;
         case 9:
             currentJob = "Bard"
             emblem.src = src="images/png/Bard.png" 
-            break
+            break;
         case 10:
             currentJob = "Black Mage"
             emblem.src = src="images/png/BlackMage.png"
-            break
+            break;
         case 11:
             currentJob = "間抜け"
             emblem.src = src="images/png/Monk.png" 
-            break
+            break;
         case 12:
             currentJob = "Sage"
             emblem.src = src="images/png/Sage.png" 
-            break
+            break;
         case 13:
             currentJob = "White Mage"
             emblem.src = src="images/png/WhiteMage.png"
-            break
+            break;
         case 14:
             currentJob = "Astrologian"
             emblem.src = src="images/png/Astrologian.png"
-            break
+            break;
         case 15:
             currentJob = "Scholar"
             emblem.src = src="images/png/Scholar.png"
-            break
+            break;
         case 16:
             currentJob = "Warrior"
             emblem.src = src="images/png/Warrior.png"
-            break
+            break;
         case 17:
             currentJob = "Gunbreaker"
             emblem.src = src="images/png/Gunbreaker.png"
-            break
+            break;
         case 18:
             currentJob = "Dark knight"
             emblem.src = src="images/png/DarkKnight.png"
-            break
+            break;
         case 19:
             currentJob = "Paladin"
             emblem.src = src="images/png/Paladin.png"
-            break
+            break;
+        default:
+            header.textContent += "ERROR"
     }
 }
 
